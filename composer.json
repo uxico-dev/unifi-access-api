@@ -1,0 +1,54 @@
+{
+    "name": "uxicodev/unifi-access-api",
+    "description": "An API client for the Ubiquiti Unifi Access API",
+    "keywords": [
+        "uxicodev",
+        "unifi-access-api"
+    ],
+    "homepage": "https://github.com/uxicodev/unifi-access-api",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Maarten Kuiper",
+            "email": "maarten@uxico.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Uxicodev\\UnifiAccessApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Uxicodev\\UnifiAccessApi\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Uxicodev\\UnifiAccessApi\\UnifiAccessApiServiceProvider"
+            ],
+            "aliases": {
+                "UnifiAccessApi": "Uxicodev\\UnifiAccessApi\\UnifiAccessApiFacade"
+            }
+        }
+    }
+}
