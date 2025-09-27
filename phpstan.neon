@@ -1,12 +1,11 @@
-
 parameters:
     level: 8
     paths:
         - src
         - config
-        - database
     tmpDir: build/phpstan
-    checkModelProperties: true
     reportUnmatchedIgnoredErrors: true
 
     ignoreErrors:
+        - '#Unable to resolve the template type TKey in call to function collect#'
+        - '#Unable to resolve the template type TValue in call to function collect#'

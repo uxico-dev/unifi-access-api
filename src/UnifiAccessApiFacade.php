@@ -5,7 +5,7 @@ namespace Uxicodev\UnifiAccessApi;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Uxicodev\UnifiAccessApi\Skeleton\SkeletonClass
+ * @see \Uxicodev\UnifiAccessApi\UnifiAccessApi
  */
 class UnifiAccessApiFacade extends Facade
 {
