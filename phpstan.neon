@@ -1,0 +1,12 @@
+
+parameters:
+    level: 8
+    paths:
+        - src
+        - config
+        - database
+    tmpDir: build/phpstan
+    checkModelProperties: true
+    reportUnmatchedIgnoredErrors: true
+
+    ignoreErrors:

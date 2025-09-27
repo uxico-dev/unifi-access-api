@@ -1,5 +1,10 @@
 .idea/**
 composer.phar
+composer.lock
 /vendor/
-
-
+.env
+.phpunit.cache/
+.phpunit.result.cache
+.phpunit.cache/test-results
+.php-cs-fixer.cache
+tests/Support/temp/
