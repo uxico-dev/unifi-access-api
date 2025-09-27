@@ -1,4 +1,4 @@
-# Very short description of the package
+# A PHP (Laravel) API client for the Unifi Access API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/uxicodev/unifi-access-api.svg?style=flat-square)](https://packagist.org/packages/uxicodev/unifi-access-api)
 [![Total Downloads](https://img.shields.io/packagist/dt/uxicodev/unifi-access-api.svg?style=flat-square)](https://packagist.org/packages/uxicodev/unifi-access-api)
