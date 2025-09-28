@@ -9,9 +9,9 @@ use Uxicodev\UnifiAccessApi\API\VisitorClient;
 
 class Client
 {
-    private GuzzleHttpClient $client;
+    protected GuzzleHttpClient $client;
 
-    private VisitorClient $visitor;
+    protected VisitorClient $visitor;
 
     /**
      * @param  array<string, string>  $options

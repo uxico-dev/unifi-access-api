@@ -1,0 +1,68 @@
+{
+  "code": "SUCCESS",
+  "data": {
+    "first_name": "H",
+    "id": "8564ce90-76ba-445f-b78b-6cca39af0130",
+    "last_name": "L",
+    "create_time": 1759087879,
+    "start_time": 1759087879,
+    "end_time": 1759091479,
+    "nfc_cards": [],
+    "pin_code": null,
+    "resources": [
+      {
+        "id": "5c496423-6d25-4e4f-8cdf-95ad5135188a",
+        "name": "Door-Group-1",
+        "type": "door_group"
+      },
+      {
+        "id": "d5573467-d6b3-4e8f-8e48-8a322b91664a",
+        "name": "UNVR",
+        "type": "door_group"
+      },
+      {
+        "id": "e311ca94-172c-49fe-9c91-49bd8ecef845",
+        "name": "visitor-1691646856144",
+        "type": "door_group"
+      }
+    ],
+    "schedule": {
+      "id": "c03bf601-0b90-4341-bce4-6061931e9f4e",
+      "is_default": false,
+      "name": "visitor-1691646856097",
+      "type": "access",
+      "weekly": {
+        "friday": [
+          {
+            "end_time": "17:00:59",
+            "start_time": "10:00:00"
+          }
+        ],
+        "monday": [
+          {
+            "end_time": "17:00:59",
+            "start_time": "10:00:00"
+          }
+        ],
+        "saturday": [],
+        "sunday": [],
+        "thursday": [
+          {
+            "end_time": "18:00:59",
+            "start_time": "11:00:00"
+          }
+        ],
+        "tuesday": [],
+        "wednesday": [
+          {
+            "end_time": "17:00:59",
+            "start_time": "10:00:00"
+          }
+        ]
+      }
+    },
+    "schedule_id": "c03bf601-0b90-4341-bce4-6061931e9f4e",
+    "status": "ACTIVE"
+  },
+  "msg": "success"
+}
