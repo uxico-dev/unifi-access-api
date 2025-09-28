@@ -35,7 +35,8 @@ use Uxicodev\UnifiAccessApi\UnifiAccessApiFacade;
 
 $unifiClient = UnifiAccessApiFacade::getClient();
 $visitorRequest = new CreateVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
-$unifiClient->visitor()->create($visitorRequest);
+$visitorResponse = $unifiClient->visitor()->create($visitorRequest);
+$unifiClient->visitor()->assignQrCode($visitorResponse->data->id);
 ```
 
 ### Non-Laravel application
@@ -48,6 +49,7 @@ use Uxicodev\UnifiAccessApi\HttpClient\Client as UnifiClient;
 $unifiClient = new UnifiClient($baseUri, $apiKey, ['verify' => false]);
 $visitorRequest = new CreateVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
 $visitorResponse = $unifiClient->visitor()->create($visitorRequest);
+$unifiClient->visitor()->assignQrCode($visitorResponse->data->id);
 ```
 
 ## FAQ

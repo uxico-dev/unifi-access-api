@@ -47,6 +47,16 @@ class Client
         return $this->client->post($url, ['body' => json_encode($data)]);
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     *
+     * @throws GuzzleException
+     */
+    public function put(string $url, array $data = []): ResponseInterface
+    {
+        return $this->client->put($url, ['body' => json_encode($data)]);
+    }
+
     public function visitor(): VisitorClient
     {
         return $this->visitor;

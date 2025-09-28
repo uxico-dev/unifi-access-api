@@ -4,6 +4,7 @@ namespace Uxicodev\UnifiAccessApi\API;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorsResponse;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
@@ -61,5 +62,22 @@ class VisitorClient
         $data = json_decode($response->getBody()->getContents(), true);
 
         return VisitorResponse::fromArray($data);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws GuzzleException
+     */
+    public function assignQrCode(UuidV4 $visitorId): UnifiResponse
+    {
+        $response = $this->client->put($this::ENDPOINT."/{$visitorId->getValue()}/qr_codes");
+
+        if ($response->getStatusCode() !== 200) {
+            throw new InvalidResponseException($response->getReasonPhrase(), $response);
+        }
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return UnifiResponse::fromArray($data);
     }
 }
