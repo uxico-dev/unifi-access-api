@@ -2,6 +2,7 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 
@@ -13,8 +14,8 @@ class CreateVisitorRequest
     public function __construct(
         public readonly string $first_name,
         public readonly string $last_name,
-        public readonly int $start_time,
-        public readonly int $end_time,
+        public readonly Carbon $start_time,
+        public readonly Carbon $end_time,
         public readonly VisitReason $visit_reason,
         public readonly ?string $remarks = null,
         public readonly ?string $mobile_phone = null,
@@ -33,11 +34,11 @@ class CreateVisitorRequest
         $resources = collect($data['resources'] ?? [])->map(fn ($item) => ResourceRequest::fromArray($item));
 
         return new self(
-            $data['first_name'] ?? '',
-            $data['last_name'] ?? '',
-            $data['start_time'] ?? 0,
-            $data['end_time'] ?? 0,
-            VisitReason::from($data['visit_reason'] ?? ''),
+            $data['first_name'],
+            $data['last_name'],
+            $data['start_time'],
+            $data['end_time'],
+            VisitReason::from($data['visit_reason']),
             $data['remarks'] ?? '',
             $data['mobile_phone'] ?? '',
             $data['email'] ?? '',
@@ -71,8 +72,8 @@ class CreateVisitorRequest
             'mobile_phone' => $this->mobile_phone,
             'email' => $this->email,
             'visitor_company' => $this->visitor_company,
-            'start_time' => $this->start_time,
-            'end_time' => $this->end_time,
+            'start_time' => $this->start_time->unix(),
+            'end_time' => $this->end_time->unix(),
             'visit_reason' => $this->visit_reason->value,
             'week_schedule' => $this->week_schedule?->toArray(),
             'resources' => $this->resources?->map(fn ($item) => $item->toArray())->all(),
