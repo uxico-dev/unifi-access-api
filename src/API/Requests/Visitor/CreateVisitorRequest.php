@@ -3,8 +3,9 @@
 namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
 use Illuminate\Support\Collection;
+use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 
-class VisitorRequest
+class CreateVisitorRequest
 {
     /**
      * @param  ?Collection<int, ResourceRequest>  $resources
@@ -47,7 +48,19 @@ class VisitorRequest
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *   first_name: string,
+     *   last_name: string,
+     *   remarks: string|null,
+     *   mobile_phone: string|null,
+     *   email: string|null,
+     *   visitor_company: string|null,
+     *   start_time: int,
+     *   end_time: int,
+     *   visit_reason: string,
+     *   week_schedule: array<string, array<int, array{start_time: int|null, end_time: int|null}>>|null,
+     *   resources: array<int, array<string, string|null>>|null
+     * }
      */
     public function toArray(): array
     {

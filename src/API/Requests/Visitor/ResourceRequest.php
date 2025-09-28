@@ -2,11 +2,13 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
+use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
+
 class ResourceRequest
 {
     public function __construct(
         public readonly string $id,
-        public readonly ?string $type = null
+        public readonly ?ResourceType $type = null
     ) {}
 
     /**
@@ -16,18 +18,18 @@ class ResourceRequest
     {
         return new self(
             $data['id'] ?? '',
-            $data['type'] ?? null
+            ResourceType::from($data['type'])
         );
     }
 
     /**
-     * @return array<string, string>
+     * @return array{id: string, type: string|null}
      */
     public function toArray(): array
     {
-        return array_filter([
+        return [
             'id' => $this->id,
-            'type' => $this->type,
-        ], fn ($v) => $v !== null);
+            'type' => $this->type?->value,
+        ];
     }
 }

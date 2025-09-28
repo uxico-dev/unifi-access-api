@@ -26,7 +26,7 @@ class WeekScheduleRequest
     }
 
     /**
-     * @return array<string, array<int, array<string, string>>>
+     * @return array<string, array<int, array{start_time: int|null, end_time: int|null}>>
      */
     public function toArray(): array
     {

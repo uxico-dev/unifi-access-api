@@ -2,11 +2,13 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
+use Carbon\Carbon;
+
 class ScheduleDayRequest
 {
     public function __construct(
-        public readonly string $start_time,
-        public readonly string $end_time
+        public readonly ?Carbon $start_time,
+        public readonly ?Carbon $end_time
     ) {}
 
     /**
@@ -15,19 +17,19 @@ class ScheduleDayRequest
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['start_time'] ?? '',
-            $data['end_time'] ?? ''
+            $data['start_time'] ? Carbon::parse($data['start_time']) : null,
+            $data['end_time'] ? Carbon::parse($data['end_time']) : null
         );
     }
 
     /**
-     * @return array<string, string>
+     * @return array{start_time: int|null, end_time: int|null}
      */
     public function toArray(): array
     {
         return [
-            'start_time' => $this->start_time,
-            'end_time' => $this->end_time,
+            'start_time' => $this->start_time?->unix(),
+            'end_time' => $this->end_time?->unix(),
         ];
     }
 }

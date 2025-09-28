@@ -3,7 +3,7 @@
 namespace Uxicodev\UnifiAccessApi\API;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorsResponse;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
@@ -49,7 +49,7 @@ class VisitorClient
         return VisitorsResponse::fromArray($data);
     }
 
-    public function create(VisitorRequest $request): VisitorResponse
+    public function create(CreateVisitorRequest $request): VisitorResponse
     {
         $response = $this->client->post($this::ENDPOINT, $request->toArray());
 

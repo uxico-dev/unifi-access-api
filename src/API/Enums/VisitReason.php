@@ -1,6 +1,6 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
+namespace Uxicodev\UnifiAccessApi\API\Enums;
 
 enum VisitReason: string
 {
