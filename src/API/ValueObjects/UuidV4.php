@@ -6,7 +6,7 @@ class UuidV4
 {
     public function __construct(private readonly string $value)
     {
-        if (!preg_match('~^[[:xdigit:]]{8}(?:\-[[:xdigit:]]{4}){3}\-[[:xdigit:]]{12}$~i', $value)) {
+        if (! preg_match('~^[[:xdigit:]]{8}(?:\-[[:xdigit:]]{4}){3}\-[[:xdigit:]]{12}$~i', $value)) {
             throw new \InvalidArgumentException("Invalid UUID v4 format: {$value}");
         }
     }
@@ -15,7 +15,6 @@ class UuidV4
     {
         return $this->value;
     }
-
 
     public function __toString(): string
     {

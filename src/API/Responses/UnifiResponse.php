@@ -2,7 +2,6 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Responses;
 
-
 class UnifiResponse
 {
     public function __construct(
