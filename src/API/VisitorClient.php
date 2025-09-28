@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorsResponse;
+use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
 use Uxicodev\UnifiAccessApi\HttpClient\Client;
 
@@ -19,9 +20,9 @@ class VisitorClient
      * @throws InvalidResponseException
      * @throws GuzzleException
      */
-    public function find(string $visitorId): VisitorResponse
+    public function find(UuidV4 $visitorId): VisitorResponse
     {
-        $response = $this->client->get($this::ENDPOINT."/{$visitorId}");
+        $response = $this->client->get($this::ENDPOINT."/{$visitorId->getValue()}");
 
         if ($response->getStatusCode() !== 200) {
             throw new InvalidResponseException($response->getReasonPhrase(), $response);

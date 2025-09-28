@@ -2,12 +2,15 @@
 
 namespace Uxicodev\UnifiAccessApi\Entities;
 
+use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
+use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
+
 class ResourceEntity
 {
     public function __construct(
-        public readonly string $id,
+        public readonly UuidV4 $id,
         public readonly string $name,
-        public readonly string $type
+        public readonly ResourceType $type
     ) {}
 
     /**
@@ -16,9 +19,9 @@ class ResourceEntity
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'] ?? '',
+            new UuidV4($data['id']),
             $data['name'] ?? '',
-            $data['type'] ?? ''
+            ResourceType::from($data['type'])
         );
     }
 }

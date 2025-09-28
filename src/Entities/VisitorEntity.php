@@ -2,7 +2,9 @@
 
 namespace Uxicodev\UnifiAccessApi\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
 class VisitorEntity
 {
@@ -13,16 +15,16 @@ class VisitorEntity
      * @param  Collection<array-key, ResourceEntity>  $resources
      */
     public function __construct(
-        public readonly string $id,
+        public readonly UuidV4 $id,
         public readonly string $first_name,
         public readonly string $last_name,
         public readonly string $email,
         public readonly string $inviter_id,
         public readonly string $inviter_name,
         public readonly string $avatar,
-        public readonly int $create_time,
-        public readonly int $end_time,
-        public readonly int $start_time,
+        public readonly Carbon $create_time,
+        public readonly Carbon $end_time,
+        public readonly Carbon $start_time,
         public readonly string $status,
         public readonly string $visit_reason,
         public readonly string $visitor_company,
@@ -44,16 +46,16 @@ class VisitorEntity
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'] ?? '',
+            new UuidV4($data['id']),
             $data['first_name'] ?? '',
             $data['last_name'] ?? '',
             $data['email'] ?? '',
             $data['inviter_id'] ?? '',
             $data['inviter_name'] ?? '',
             $data['avatar'] ?? '',
-            $data['create_time'] ?? 0,
-            $data['end_time'] ?? 0,
-            $data['start_time'] ?? 0,
+            Carbon::parse($data['create_time']),
+            Carbon::parse($data['end_time']),
+            Carbon::parse($data['start_time']),
             $data['status'] ?? '',
             $data['visit_reason'] ?? '',
             $data['visitor_company'] ?? '',
