@@ -9,23 +9,10 @@ use Uxicodev\UnifiAccessApi\API\VisitorClient;
 
 class Client
 {
-    protected GuzzleHttpClient $client;
-
     protected VisitorClient $visitor;
 
-    /**
-     * @param  array<string, string>  $options
-     */
-    public function __construct(string $baseUri, string $apiKey, array $options = [])
+    public function __construct(protected GuzzleHttpClient $client)
     {
-        $this->client = new GuzzleHttpClient(array_merge([
-            'base_uri' => $baseUri,
-            'headers' => [
-                'Authorization' => "Bearer {$apiKey}",
-                'Accept' => 'application/json',
-            ],
-        ], $options));
-
         $this->visitor = new VisitorClient($this);
     }
 

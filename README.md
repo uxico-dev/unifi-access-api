@@ -21,14 +21,15 @@ composer require uxicodev/unifi-access-api
 Add the following to your `.env` file:
 ```dotenv
 ## Replace with your actual Unifi Access controller URL
-UNIFI_ACCESS_URI=https://192.168.1.1:12445/api/v1/developer/
+UNIFI_ACCESS_URI="https://192.168.1.1:12445/api/v1/developer/"
 #API key can be retrieved in your admin console at page "access/settings/system"
-UNIFI_ACCESS_API_KEY=your_api_key_here
+UNIFI_ACCESS_API_KEY="your_api_key_here"
 UNIFI_ACCESS_SSL_VERIFY=false
 ```
 
 ```php
 use Carbon\Carbon;
+use GuzzleHttp\Client as GuzzleHttpClient;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\UnifiAccessApiFacade;
@@ -46,7 +47,19 @@ use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\HttpClient\Client as UnifiClient;
 
-$unifiClient = new UnifiClient($baseUri, $apiKey, ['verify' => false]);
+$baseUri = 'https://192.168.1.1:12445/api/v1/developer/';
+$apiKey = 'your_api_key_here';
+
+$guzzleClient = new GuzzleHttpClient([
+    'base_uri' => $baseUri,
+    'headers' => [
+        'Authorization' => $apiKey,
+        'Accept' => 'application/json',
+    ],
+    'verify' => false,
+]);
+            
+$unifiClient = new UnifiClient($guzzleClient);
 $visitorRequest = new CreateVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
 $visitorResponse = $unifiClient->visitor()->create($visitorRequest);
 $unifiClient->visitor()->assignQrCode($visitorResponse->data->id);

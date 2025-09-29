@@ -26,13 +26,13 @@ class VisitorClientTest extends TestCase
     public function create_a_visitor_returns_visitor_response(): void
     {
         $mock = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__.'/fixtures/visitor/create.json') ?? ''),
+            new Response(200, [], file_get_contents(__DIR__.'/fixtures/visitor/create.json')),
         ]);
 
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $unifiClient = new ClientOverride($client);
+        $unifiClient = new \Uxicodev\UnifiAccessApi\HttpClient\Client($client);
 
         $response = $unifiClient->visitor()->create(new CreateVisitorRequest(
             'Saul',

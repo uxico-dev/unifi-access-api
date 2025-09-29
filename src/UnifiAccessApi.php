@@ -2,6 +2,7 @@
 
 namespace Uxicodev\UnifiAccessApi;
 
+use GuzzleHttp\Client as GuzzleHttpClient;
 use Uxicodev\UnifiAccessApi\HttpClient\Client;
 
 class UnifiAccessApi
@@ -11,10 +12,20 @@ class UnifiAccessApi
      */
     public function getClient(array $options = []): Client
     {
-        return new Client(
-            config('unifi-access-api.unifi.uri'),
-            config('unifi-access-api.unifi.api_key'),
-            array_merge(['verify' => config('unifi-access-api.unifi.ssl_verify')], $options)
+        $guzzleClient = app(GuzzleHttpClient::class,
+            array_merge(
+                [
+                    'base_uri' => config('unifi-access-api.unifi.uri'),
+                    'headers' => [
+                        'Authorization' => config('unifi-access-api.unifi.api_key'),
+                        'Accept' => 'application/json',
+                    ],
+                    'verify' => config('unifi-access-api.unifi.ssl_verify'),
+                ],
+                $options
+            )
         );
+
+        return new Client($guzzleClient);
     }
 }
