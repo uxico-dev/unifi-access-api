@@ -2,8 +2,10 @@
     "name": "uxicodev/unifi-access-api",
     "description": "An API client for the Ubiquiti Unifi Access API",
     "keywords": [
-        "uxicodev",
-        "unifi-access-api"
+        "ubiquiti",
+        "unifi",
+        "access",
+        "api"
     ],
     "homepage": "https://github.com/uxicodev/unifi-access-api",
     "license": "MIT",
