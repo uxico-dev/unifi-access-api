@@ -30,7 +30,6 @@ class VisitorClient
         }
 
         $data = json_decode($response->getBody()->getContents(), true);
-        dump($data);
 
         return VisitorResponse::fromArray($data);
     }
@@ -78,7 +77,6 @@ class VisitorClient
         }
 
         $data = json_decode($response->getBody()->getContents(), true);
-
         return UnifiResponse::fromArray($data);
     }
 }

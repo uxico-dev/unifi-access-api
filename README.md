@@ -46,6 +46,7 @@ use Carbon\Carbon;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\HttpClient\Client as UnifiClient;
+use GuzzleHttp\Client as GuzzleHttpClient;
 
 $baseUri = 'https://192.168.1.1:12445/api/v1/developer/';
 $apiKey = 'your_api_key_here';
@@ -63,6 +64,7 @@ $unifiClient = new UnifiClient($guzzleClient);
 $visitorRequest = new CreateVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
 $visitorResponse = $unifiClient->visitor()->create($visitorRequest);
 $unifiClient->visitor()->assignQrCode($visitorResponse->data->id);
+$tmpFile = $unifiClient->credential()->downloadQrCode($visitorResponse->data->id);
 ```
 
 ## FAQ
