@@ -9,9 +9,10 @@ class ResourceEntity
 {
     public function __construct(
         public readonly UuidV4 $id,
-        public readonly string $name,
-        public readonly ResourceType $type
-    ) {}
+        public readonly ResourceType $type,
+        public readonly ?string $name = null,
+    ) {
+    }
 
     /**
      * @param  array<string, mixed>  $data
@@ -20,8 +21,16 @@ class ResourceEntity
     {
         return new self(
             new UuidV4($data['id']),
+            ResourceType::from($data['type']),
             $data['name'] ?? '',
-            ResourceType::from($data['type'])
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => (string) $this->id,
+            'type' => $this->type->value,
+        ] + ($this->name ? ['name' => $this->name] : []);
     }
 }
