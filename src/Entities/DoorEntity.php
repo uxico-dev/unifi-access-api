@@ -5,13 +5,13 @@ namespace Uxicodev\UnifiAccessApi\Entities;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class DoorEntity
+readonly class DoorEntity
 {
     public function __construct(
-        public readonly UuidV4 $id,
-        public readonly bool $is_bind_hub,
-        public readonly string $name,
-        public readonly ResourceType $type
+        public UuidV4 $id,
+        public bool $is_bind_hub,
+        public string $name,
+        public ResourceType $type
     ) {}
 
     /** @param array<array-key, mixed> $data */

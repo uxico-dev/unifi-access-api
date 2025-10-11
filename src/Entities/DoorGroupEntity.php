@@ -6,14 +6,14 @@ use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class DoorGroupEntity
+readonly class DoorGroupEntity
 {
     /** @param  Collection<array-key, ResourceTopologyEntity>  $resource_topologies */
     public function __construct(
-        public readonly UuidV4 $id,
-        public readonly string $name,
-        public readonly Collection $resource_topologies,
-        public readonly ResourceType $type
+        public UuidV4 $id,
+        public string $name,
+        public Collection $resource_topologies,
+        public ResourceType $type
     ) {}
 
     /** @param array<array-key, mixed> $data */

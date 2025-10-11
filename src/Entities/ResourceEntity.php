@@ -5,12 +5,12 @@ namespace Uxicodev\UnifiAccessApi\Entities;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class ResourceEntity
+readonly class ResourceEntity
 {
     public function __construct(
-        public readonly UuidV4 $id,
-        public readonly ResourceType $type,
-        public readonly ?string $name = null,
+        public UuidV4 $id,
+        public ResourceType $type,
+        public ?string $name = null,
     ) {}
 
     /** @param  array<string, mixed> $data */

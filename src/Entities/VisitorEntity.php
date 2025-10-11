@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class VisitorEntity
+readonly class VisitorEntity
 {
     /**
      * @param  Collection<array-key, string>  $license_plates
@@ -15,29 +15,29 @@ class VisitorEntity
      * @param  Collection<array-key, ResourceEntity>  $resources
      */
     public function __construct(
-        public readonly UuidV4 $id,
-        public readonly string $first_name,
-        public readonly string $last_name,
-        public readonly string $email,
-        public readonly string $inviter_id,
-        public readonly string $inviter_name,
-        public readonly string $avatar,
-        public readonly Carbon $create_time,
-        public readonly Carbon $end_time,
-        public readonly Carbon $start_time,
-        public readonly string $status,
-        public readonly string $visit_reason,
-        public readonly string $visitor_company,
-        public readonly string $location_id,
-        public readonly string $mobile_phone,
-        public readonly string $schedule_id,
-        public readonly string $timezone,
-        public readonly bool $has_qr_code,
-        public readonly string $remarks,
-        public readonly Collection $license_plates,
-        public readonly Collection $nfc_cards,
-        public readonly Collection $pin_code,
-        public readonly Collection $resources
+        public UuidV4 $id,
+        public string $first_name,
+        public string $last_name,
+        public string $email,
+        public string $inviter_id,
+        public string $inviter_name,
+        public string $avatar,
+        public Carbon $create_time,
+        public Carbon $end_time,
+        public Carbon $start_time,
+        public string $status,
+        public string $visit_reason,
+        public string $visitor_company,
+        public string $location_id,
+        public string $mobile_phone,
+        public string $schedule_id,
+        public string $timezone,
+        public bool $has_qr_code,
+        public string $remarks,
+        public Collection $license_plates,
+        public Collection $nfc_cards,
+        public Collection $pin_code,
+        public Collection $resources
     ) {}
 
     /**
