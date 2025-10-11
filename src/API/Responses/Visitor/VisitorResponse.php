@@ -2,15 +2,18 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Responses\Visitor;
 
+use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
 use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
 
-class VisitorResponse
+readonly class VisitorResponse extends UnifiResponse
 {
     public function __construct(
-        public readonly string $code,
-        public readonly VisitorEntity $data,
-        public readonly string $msg
-    ) {}
+        string $code,
+        string $msg,
+        public VisitorEntity $data,
+    ) {
+        parent::__construct($code, $msg);
+    }
 
     /**
      * @param  array<string, mixed>  $response
@@ -19,8 +22,8 @@ class VisitorResponse
     {
         return new self(
             $response['code'] ?? '',
+            $response['msg'] ?? '',
             VisitorEntity::fromArray($response['data'] ?? []),
-            $response['msg'] ?? ''
         );
     }
 }

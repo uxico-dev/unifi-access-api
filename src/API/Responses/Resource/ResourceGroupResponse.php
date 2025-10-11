@@ -1,15 +1,15 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\API\Responses\Visitor;
+namespace Uxicodev\UnifiAccessApi\API\Responses\Resource;
 
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
-use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
+use Uxicodev\UnifiAccessApi\Entities\DoorGroupEntity;
 
-readonly class VisitorsResponse extends UnifiResponse
+readonly class ResourceGroupResponse extends UnifiResponse
 {
     /**
-     * @param  Collection<int, VisitorEntity>  $data
+     * @param  Collection<int, DoorGroupEntity>  $data
      */
     public function __construct(
         string $code,
@@ -19,18 +19,15 @@ readonly class VisitorsResponse extends UnifiResponse
         parent::__construct($code, $msg);
     }
 
-    /**
-     * @param  array<string, mixed>  $response
-     */
     public static function fromArray(array $response): self
     {
-        /** @var Collection<int, VisitorEntity> $visitors */
-        $visitors = collect($response['data'] ?? [])->map(fn ($item) => VisitorEntity::fromArray($item));
+        $data = collect($response['data'] ?? [])
+            ->map(fn ($item) => DoorGroupEntity::fromArray($item));
 
         return new self(
             $response['code'] ?? '',
             $response['msg'] ?? '',
-            $visitors,
+            $data,
         );
     }
 }

@@ -3,7 +3,7 @@
 namespace Uxicodev\UnifiAccessApi;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
-use Uxicodev\UnifiAccessApi\HttpClient\Client;
+use Uxicodev\UnifiAccessApi\Client\Client;
 
 class UnifiAccessApi
 {

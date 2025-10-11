@@ -1,22 +1,27 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\HttpClient;
+namespace Uxicodev\UnifiAccessApi\Client;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use Uxicodev\UnifiAccessApi\API\CredentialClient;
+use Uxicodev\UnifiAccessApi\API\DoorGroupsClient;
 use Uxicodev\UnifiAccessApi\API\VisitorClient;
 
 class Client
 {
     protected VisitorClient $visitorClient;
+
     protected CredentialClient $credentialClient;
+
+    protected DoorGroupsClient $doorGroupsClient;
 
     public function __construct(protected GuzzleHttpClient $client)
     {
         $this->visitorClient = new VisitorClient($this);
         $this->credentialClient = new CredentialClient($this);
+        $this->doorGroupsClient = new DoorGroupsClient($this);
     }
 
     /**
@@ -51,8 +56,14 @@ class Client
     {
         return $this->visitorClient;
     }
+
     public function credential(): CredentialClient
     {
         return $this->credentialClient;
+    }
+
+    public function doorGroups(): DoorGroupsClient
+    {
+        return $this->doorGroupsClient;
     }
 }

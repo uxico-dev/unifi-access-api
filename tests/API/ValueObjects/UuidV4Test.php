@@ -3,8 +3,8 @@
 namespace Uxicodev\UnifiAccessApi\Tests\API\ValueObjects;
 
 use PHPUnit\Framework\Attributes\Test;
-use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use PHPUnit\Framework\TestCase;
+use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
 class UuidV4Test extends TestCase
 {

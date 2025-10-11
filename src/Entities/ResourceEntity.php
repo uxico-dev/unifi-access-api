@@ -11,12 +11,9 @@ class ResourceEntity
         public readonly UuidV4 $id,
         public readonly ResourceType $type,
         public readonly ?string $name = null,
-    ) {
-    }
+    ) {}
 
-    /**
-     * @param  array<string, mixed>  $data
-     */
+    /** @param  array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
@@ -26,6 +23,7 @@ class ResourceEntity
         );
     }
 
+    /** @return array{name?: non-falsy-string, id: string, type: 'building'|'door'|'door_group'|'floor'} */
     public function toArray(): array
     {
         return [

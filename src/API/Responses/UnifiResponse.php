@@ -2,11 +2,11 @@
 
 namespace Uxicodev\UnifiAccessApi\API\Responses;
 
-class UnifiResponse
+readonly class UnifiResponse
 {
     public function __construct(
-        public readonly string $code,
-        public readonly string $msg
+        public string $code,
+        public string $msg
     ) {}
 
     /**

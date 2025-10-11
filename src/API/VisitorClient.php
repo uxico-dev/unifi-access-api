@@ -8,8 +8,8 @@ use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorsResponse;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
+use Uxicodev\UnifiAccessApi\Client\Client;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
-use Uxicodev\UnifiAccessApi\HttpClient\Client;
 
 class VisitorClient
 {
@@ -77,6 +77,7 @@ class VisitorClient
         }
 
         $data = json_decode($response->getBody()->getContents(), true);
+
         return UnifiResponse::fromArray($data);
     }
 }
