@@ -14,6 +14,7 @@ use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
 use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
+use Uxicodev\UnifiAccessApi\Exceptions\UnifiApiErrorException;
 use Uxicodev\UnifiAccessApi\UnifiAccessApiServiceProvider;
 
 class VisitorClientTest extends TestCase
@@ -48,26 +49,48 @@ class VisitorClientTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $response->data->start_time);
         $this->assertInstanceOf(Carbon::class, $response->data->end_time);
     }
-    //TODO: Add test for failure case
-//    #[Test]
-//    public function create_visitor_failure_throws_exception(): void
-//    {
-//        $mockHandler = new MockHandler([
-//            new Response(400, []),
-//        ]);
-//
-//        $handlerStack = HandlerStack::create($mockHandler);
-//        $client = new Client(['handler' => $handlerStack]);
-//
-//        $unifiClient = new UnifiClient($client);
-//
-//        $this->expectException(InvalidResponseException::class);
-//        $response = $unifiClient->visitor()->create(new CreateVisitorRequest(
-//            'Saul',
-//            'Goodman',
-//            Carbon::now(),
-//            Carbon::now(),
-//            VisitReason::Business,
-//        ));
-//    }
+
+    #[Test]
+    public function bad_request_response_throws_exception(): void
+    {
+        $mockHandler = new MockHandler([
+            new Response(400, []),
+        ]);
+
+        $handlerStack = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handlerStack]);
+
+        $unifiClient = new UnifiClient($client);
+
+        $this->expectException(InvalidResponseException::class);
+        $unifiClient->visitor()->create(new CreateVisitorRequest(
+            'Saul',
+            'Goodman',
+            Carbon::now(),
+            Carbon::now(),
+            VisitReason::Business,
+        ));
+    }
+
+    #[Test]
+    public function non_success_code_in_response_throws_unifi_api_error_exception(): void
+    {
+        $mockHandler = new MockHandler([
+            new Response(200, [], json_encode(['code' => 'CODE_PARAMS_INVALID', 'msg' => 'Invalid parameters'])),
+        ]);
+
+        $handlerStack = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handlerStack]);
+
+        $unifiClient = new UnifiClient($client);
+
+        $this->expectException(UnifiApiErrorException::class);
+        $unifiClient->visitor()->create(new CreateVisitorRequest(
+            'Saul',
+            'Goodman',
+            Carbon::now(),
+            Carbon::now(),
+            VisitReason::Business,
+        ));
+    }
 }
