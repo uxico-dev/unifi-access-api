@@ -28,12 +28,14 @@ class Client
     }
 
     /**
+     * @param  array<string, mixed>  $options
+     *
      * @throws InvalidResponseException|UnifiApiErrorException|GuzzleException
      */
-    public function get(string $url): ResponseInterface
+    public function get(string $url, array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->get($url);
+            $response = $this->client->get($url, $options);
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
@@ -46,13 +48,14 @@ class Client
 
     /**
      * @param  array<string, mixed>  $data
+     * @param  array<string, mixed>  $options
      *
      * @throws InvalidResponseException|UnifiApiErrorException|GuzzleException
      */
-    public function post(string $url, array $data = []): ResponseInterface
+    public function post(string $url, array $data = [], array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->post($url, ['body' => json_encode($data)]);
+            $response = $this->client->post($url, array_merge(['body' => json_encode($data)], $options));
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
@@ -65,13 +68,33 @@ class Client
 
     /**
      * @param  array<string, mixed>  $data
+     * @param  array<string, mixed>  $options
      *
      * @throws InvalidResponseException|UnifiApiErrorException|GuzzleException
      */
-    public function put(string $url, array $data = []): ResponseInterface
+    public function put(string $url, array $data = [], array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->put($url, ['body' => json_encode($data)]);
+            $response = $this->client->put($url, array_merge(['body' => json_encode($data)], $options));
+        } catch (RequestException $clientException) {
+            $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
+            $clientException->getResponse()?->getBody()->rewind();
+            throw new InvalidResponseException($responseBody, $clientException->getResponse(), $clientException, $clientException->getRequest());
+        }
+        $this->throwExceptionOnInvalidUnifiResponse($response);
+
+        return $response;
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     *
+     * @throws InvalidResponseException|UnifiApiErrorException|GuzzleException
+     */
+    public function delete(string $url, array $options = []): ResponseInterface
+    {
+        try {
+            $response = $this->client->delete($url, $options);
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
