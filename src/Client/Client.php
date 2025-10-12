@@ -35,13 +35,35 @@ class Client
     public function get(string $url, array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->get($url, $options);
+            $response = $this->client->get($url);
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
             throw new InvalidResponseException($responseBody, $clientException->getResponse(), $clientException, $clientException->getRequest());
         }
         $this->throwExceptionOnInvalidUnifiResponse($response);
+
+        return $response;
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     *
+     * @throws InvalidResponseException|GuzzleException
+     */
+    public function download(string $url, array $options = []): ResponseInterface
+    {
+        try {
+            $response = $this->client->get($url);
+        } catch (RequestException $clientException) {
+            $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
+            $clientException->getResponse()?->getBody()->rewind();
+            throw new InvalidResponseException($responseBody, $clientException->getResponse(), $clientException, $clientException->getRequest());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new InvalidResponseException($response->getReasonPhrase(), $response);
+        }
 
         return $response;
     }

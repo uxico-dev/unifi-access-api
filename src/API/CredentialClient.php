@@ -20,7 +20,7 @@ class CredentialClient extends ApiResourceClient
      */
     public function downloadQrCode(UuidV4 $visitorId): string
     {
-        $response = $this->client->get($this::ENDPOINT."/qr_codes/download/{$visitorId->getValue()}");
+        $response = $this->client->download($this::ENDPOINT."/qr_codes/download/{$visitorId->getValue()}");
 
         $image = $response->getBody()->getContents();
         $tmpFilePath = tempnam(sys_get_temp_dir(), 'qr_');
