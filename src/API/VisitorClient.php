@@ -70,4 +70,18 @@ class VisitorClient extends ApiResourceClient
 
         return UnifiResponse::fromArray($data);
     }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws GuzzleException
+     * @throws UnifiApiErrorException
+     */
+    public function delete(UuidV4 $visitorId): UnifiResponse
+    {
+        $response = $this->client->delete($this::ENDPOINT."/{$visitorId->getValue()}");
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return UnifiResponse::fromArray($data);
+    }
 }
