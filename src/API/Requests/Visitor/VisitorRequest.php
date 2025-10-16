@@ -7,24 +7,24 @@ use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class VisitorRequest
+readonly class VisitorRequest
 {
     /**
      * @param  ?Collection<int, ResourceRequest>  $resources
      */
     public function __construct(
-        public readonly string $first_name,
-        public readonly string $last_name,
-        public readonly Carbon $start_time,
-        public readonly Carbon $end_time,
-        public readonly VisitReason $visit_reason,
-        public readonly ?string $remarks = null,
-        public readonly ?string $mobile_phone = null,
-        public readonly ?string $email = null,
-        public readonly ?string $visitor_company = null,
-        public readonly ?WeekScheduleRequest $week_schedule = null,
-        public readonly ?Collection $resources = null,
-        public readonly ?UuidV4 $id = null,
+        public string $first_name,
+        public string $last_name,
+        public Carbon $start_time,
+        public Carbon $end_time,
+        public VisitReason $visit_reason,
+        public ?string $remarks = null,
+        public ?string $mobile_phone = null,
+        public ?string $email = null,
+        public ?string $visitor_company = null,
+        public ?WeekScheduleRequest $week_schedule = null,
+        public ?Collection $resources = null,
+        public ?UuidV4 $id = null,
     ) {}
 
     /**

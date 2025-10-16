@@ -4,11 +4,11 @@ namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
 use Carbon\Carbon;
 
-class ScheduleDayRequest
+readonly class ScheduleDayRequest
 {
     public function __construct(
-        public readonly ?Carbon $start_time,
-        public readonly ?Carbon $end_time
+        public ?Carbon $start_time,
+        public ?Carbon $end_time
     ) {}
 
     /**

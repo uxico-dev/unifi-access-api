@@ -4,13 +4,13 @@ namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 
 use Illuminate\Support\Collection;
 
-class WeekScheduleRequest
+readonly class WeekScheduleRequest
 {
     /**
      * @param  Collection<string, Collection<int, ScheduleDayRequest>>  $days
      */
     public function __construct(
-        public readonly Collection $days
+        public Collection $days
     ) {}
 
     /**

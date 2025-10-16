@@ -2,7 +2,7 @@
 
 namespace Uxicodev\UnifiAccessApi\API\ValueObjects;
 
-class UuidV4
+readonly class UuidV4
 {
     public function __construct(private readonly string $value)
     {

@@ -5,11 +5,11 @@ namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class ResourceRequest
+readonly class ResourceRequest
 {
     public function __construct(
-        public readonly UuidV4 $id,
-        public readonly ?ResourceType $type = null
+        public UuidV4 $id,
+        public ?ResourceType $type = null
     ) {}
 
     /**
