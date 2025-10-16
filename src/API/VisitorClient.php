@@ -3,7 +3,8 @@
 namespace Uxicodev\UnifiAccessApi\API;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
+use InvalidArgumentException;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
 use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorResponse;
 use Uxicodev\UnifiAccessApi\API\Responses\Visitor\VisitorsResponse;
@@ -48,9 +49,22 @@ class VisitorClient extends ApiResourceClient
      * @throws GuzzleException
      * @throws UnifiApiErrorException
      */
-    public function create(CreateVisitorRequest $request): VisitorResponse
+    public function create(VisitorRequest $request): VisitorResponse
     {
         $response = $this->client->post($this::ENDPOINT, $request->toArray());
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return VisitorResponse::fromArray($data);
+    }
+
+    public function update(VisitorRequest $request): VisitorResponse
+    {
+        if ($request->id === null) {
+            throw new InvalidArgumentException('Visitor ID is required for update.');
+        }
+
+        $response = $this->client->put($this::ENDPOINT."/{$request->id->getValue()}", $request->toArray());
 
         $data = json_decode($response->getBody()->getContents(), true);
 

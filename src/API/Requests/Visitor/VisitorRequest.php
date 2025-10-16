@@ -5,8 +5,9 @@ namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
+use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-class CreateVisitorRequest
+class VisitorRequest
 {
     /**
      * @param  ?Collection<int, ResourceRequest>  $resources
@@ -23,6 +24,7 @@ class CreateVisitorRequest
         public readonly ?string $visitor_company = null,
         public readonly ?WeekScheduleRequest $week_schedule = null,
         public readonly ?Collection $resources = null,
+        public readonly ?UuidV4 $id = null,
     ) {}
 
     /**
@@ -44,12 +46,14 @@ class CreateVisitorRequest
             $data['email'] ?? '',
             $data['visitor_company'] ?? '',
             $weekSchedule,
-            $resources
+            $resources,
+            isset($data['id']) ? new UuidV4($data['id']) : null,
         );
     }
 
     /**
      * @return array{
+     *   id: string|null,
      *   first_name: string,
      *   last_name: string,
      *   remarks: string|null,
@@ -66,6 +70,7 @@ class CreateVisitorRequest
     public function toArray(): array
     {
         return [
+            'id' => $this->id?->getValue(),
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'remarks' => $this->remarks,

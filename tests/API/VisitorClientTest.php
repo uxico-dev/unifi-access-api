@@ -7,10 +7,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\CreateVisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
 use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
@@ -36,7 +37,7 @@ class VisitorClientTest extends TestCase
 
         $unifiClient = new UnifiClient($client);
 
-        $response = $unifiClient->visitor()->create(new CreateVisitorRequest(
+        $response = $unifiClient->visitor()->create(new VisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -48,6 +49,26 @@ class VisitorClientTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $response->data->create_time);
         $this->assertInstanceOf(Carbon::class, $response->data->start_time);
         $this->assertInstanceOf(Carbon::class, $response->data->end_time);
+    }
+
+    #[Test]
+    public function edit_visitor_without_id_throws_error(): void
+    {
+        $mockHandler = new MockHandler([]);
+
+        $handlerStack = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handlerStack]);
+
+        $unifiClient = new UnifiClient($client);
+
+        $this->expectException(InvalidArgumentException::class);
+        $unifiClient->visitor()->update(new VisitorRequest(
+            'Saul',
+            'Goodman',
+            Carbon::now(),
+            Carbon::now(),
+            VisitReason::Business,
+        ));
     }
 
     #[Test]
@@ -63,7 +84,7 @@ class VisitorClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(InvalidResponseException::class);
-        $unifiClient->visitor()->create(new CreateVisitorRequest(
+        $unifiClient->visitor()->create(new VisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -85,7 +106,7 @@ class VisitorClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(UnifiApiErrorException::class);
-        $unifiClient->visitor()->create(new CreateVisitorRequest(
+        $unifiClient->visitor()->create(new VisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
