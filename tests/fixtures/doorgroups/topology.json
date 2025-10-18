@@ -1,0 +1,46 @@
+{
+  "code": "SUCCESS",
+  "data": [
+    {
+      "id": "d5573467-d6b3-4e8f-8e48-8a322b91664a",
+      "name": "All Doors",
+      "resource_topologies": [
+        {
+          "id": "9bee6e0e-108d-4c52-9107-76f2c7dea4f1",
+          "name": "Main Floor",
+          "resources": [
+            {
+              "id": "6ff875d2-af87-470b-9cb5-774c6596afc8",
+              "name": "Door 3855",
+              "type": "door",
+              "is_bind_hub": true
+            }
+          ],
+          "type": "floor"
+        }
+      ],
+      "type": "building"
+    },
+    {
+      "id": "5c496423-6d25-4e4f-8cdf-95ad5135188a",
+      "name": "customized group",
+      "resource_topologies": [
+        {
+          "id": "9bee6e0e-108d-4c52-9107-76f2c7dea4f1",
+          "name": "Main Floor",
+          "resources": [
+            {
+              "id": "6ff875d2-af87-470b-9cb5-774c6596afc8",
+              "name": "Door 3855",
+              "type": "door",
+              "is_bind_hub": true
+            }
+          ],
+          "type": "floor"
+        }
+      ],
+      "type": "access"
+    }
+  ],
+  "msg": "success"
+}

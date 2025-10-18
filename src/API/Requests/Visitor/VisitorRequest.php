@@ -41,6 +41,8 @@ readonly class VisitorRequest
 
     /**
      * @param  array<string, mixed>  $data
+     *
+     * @throws ValidationException
      */
     public static function fromArray(array $data): self
     {

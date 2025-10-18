@@ -50,7 +50,6 @@ class CredentialClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(InvalidResponseException::class);
-        $tmpFilePath = $unifiClient->credential()->downloadQrCode(new UuidV4('f884ec72-5d05-4325-9b8e-2ae6ee0181b0'));
-
+        $unifiClient->credential()->downloadQrCode(new UuidV4('f884ec72-5d05-4325-9b8e-2ae6ee0181b0'));
     }
 }

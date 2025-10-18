@@ -23,7 +23,7 @@ readonly class ResourceEntity
         );
     }
 
-    /** @return array{name?: non-falsy-string, id: string, type: 'building'|'door'|'door_group'|'floor'} */
+    /** @return array{name?: non-falsy-string, id: string, type: 'access'|'building'|'door'|'door_group'|'floor'} */
     public function toArray(): array
     {
         return [

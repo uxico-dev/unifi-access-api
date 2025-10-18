@@ -9,4 +9,5 @@ enum ResourceType: string
 
     case Floor = 'floor';
     case Building = 'building';
+    case Access = 'access';
 }

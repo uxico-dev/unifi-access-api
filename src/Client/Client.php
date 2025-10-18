@@ -61,10 +61,6 @@ class Client
             throw new InvalidResponseException($responseBody, $clientException->getResponse(), $clientException, $clientException->getRequest());
         }
 
-        if ($response->getStatusCode() !== 200) {
-            throw new InvalidResponseException($response->getReasonPhrase(), $response);
-        }
-
         return $response;
     }
 
@@ -148,10 +144,6 @@ class Client
      */
     private function throwExceptionOnInvalidUnifiResponse(ResponseInterface $response): void
     {
-        if ($response->getStatusCode() !== 200) {
-            throw new InvalidResponseException($response->getReasonPhrase(), $response);
-        }
-
         $responseBody = json_decode($response->getBody()->getContents(), true);
         if (strtoupper($responseBody['code']) !== 'SUCCESS') {
             throw new UnifiApiErrorException(sprintf('Code: [%s], Message: [%s]', $responseBody['code'], $responseBody['msg'] ?? 'Unknown unifi response'), $response);
