@@ -5,12 +5,16 @@ namespace Uxicodev\UnifiAccessApi\API\Requests\Visitor;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
+use Uxicodev\UnifiAccessApi\API\Requests\Validators\VisitorValidator;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
+use Uxicodev\UnifiAccessApi\Exceptions\ValidationException;
 
 readonly class VisitorRequest
 {
     /**
      * @param  ?Collection<int, ResourceRequest>  $resources
+     *
+     * @throws ValidationException
      */
     public function __construct(
         public string $first_name,
@@ -25,7 +29,15 @@ readonly class VisitorRequest
         public ?WeekScheduleRequest $week_schedule = null,
         public ?Collection $resources = null,
         public ?UuidV4 $id = null,
-    ) {}
+    ) {
+        $validator = new VisitorValidator($this->toArray());
+        if (! $validator->passes()) {
+            throw new ValidationException(
+                errors: $validator->getErrors(),
+                message: 'VisitorRequest validation failed.'
+            );
+        }
+    }
 
     /**
      * @param  array<string, mixed>  $data

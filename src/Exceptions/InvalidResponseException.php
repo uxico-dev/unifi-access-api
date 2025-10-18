@@ -2,15 +2,17 @@
 
 namespace Uxicodev\UnifiAccessApi\Exceptions;
 
+use Exception;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
-class InvalidResponseException extends \Exception
+class InvalidResponseException extends Exception
 {
     public function __construct(
         string $message,
         private readonly ?ResponseInterface $response,
-        ?\Throwable $previous = null,
+        ?Throwable $previous = null,
         private readonly ?RequestInterface $request = null,
     ) {
         parent::__construct($message, $response?->getStatusCode() ?? 500, $previous);
