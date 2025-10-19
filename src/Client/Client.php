@@ -35,7 +35,7 @@ class Client
     public function get(string $url, array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->get($url);
+            $response = $this->client->get($url, $options);
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
@@ -54,7 +54,7 @@ class Client
     public function download(string $url, array $options = []): ResponseInterface
     {
         try {
-            $response = $this->client->get($url);
+            $response = $this->client->get($url, $options);
         } catch (RequestException $clientException) {
             $responseBody = $clientException->getResponse()?->getBody()->getContents() ?? '[Response body was empty]';
             $clientException->getResponse()?->getBody()->rewind();
