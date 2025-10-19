@@ -12,7 +12,7 @@ class UnifiAccessApi
      */
     public function getClient(array $options = []): Client
     {
-        $guzzleClient = app(GuzzleHttpClient::class,
+        $guzzleClient = new GuzzleHttpClient(
             array_merge(
                 [
                     'base_uri' => config('unifi-access-api.unifi.uri'),
