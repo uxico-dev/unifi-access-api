@@ -4,6 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/uxicodev/unifi-access-api.svg?style=flat-square)](https://packagist.org/packages/uxicodev/unifi-access-api)
 [![Github Actions](https://github.com/uxico-dev/unifi-access-api/actions/workflows/main.yml/badge.svg)](https://github.com/uxico-dev/unifi-access-api/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/uxico-dev/unifi-access-api/graph/badge.svg?token=Y68YR7KK21)](https://codecov.io/gh/uxico-dev/unifi-access-api)
+![Static Badge](https://img.shields.io/badge/level%208%20-%20phpstan?logo=php&label=PHPStan&color=darkblue)
 
 A GuzzleHTTP client that can communicate with the Ubiquiti Unifi Access API. Ready to use with Laravel, but can also be used with other frameworks or plain PHP.
 
