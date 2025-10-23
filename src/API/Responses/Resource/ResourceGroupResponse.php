@@ -4,7 +4,7 @@ namespace Uxicodev\UnifiAccessApi\API\Responses\Resource;
 
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
-use Uxicodev\UnifiAccessApi\Entities\DoorGroupEntity;
+use Uxicodev\UnifiAccessApi\Entities\DoorGroups\DoorGroupEntity;
 
 readonly class ResourceGroupResponse extends UnifiResponse
 {

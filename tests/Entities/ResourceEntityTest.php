@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
-use Uxicodev\UnifiAccessApi\Entities\ResourceEntity;
+use Uxicodev\UnifiAccessApi\Entities\Visitor\ResourceEntity;
 
 class ResourceEntityTest extends TestCase
 {

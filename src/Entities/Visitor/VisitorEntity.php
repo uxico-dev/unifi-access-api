@@ -1,6 +1,6 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\Entities;
+namespace Uxicodev\UnifiAccessApi\Entities\Visitor;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;

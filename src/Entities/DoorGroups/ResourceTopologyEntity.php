@@ -1,32 +1,32 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\Entities;
+namespace Uxicodev\UnifiAccessApi\Entities\DoorGroups;
 
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 
-readonly class DoorGroupEntity
+readonly class ResourceTopologyEntity
 {
-    /** @param  Collection<array-key, ResourceTopologyEntity>  $resource_topologies */
+    /** @param  Collection<array-key, DoorEntity>  $resources */
     public function __construct(
         public UuidV4 $id,
         public string $name,
-        public Collection $resource_topologies,
+        public Collection $resources,
         public ResourceType $type
     ) {}
 
     /** @param array<array-key, mixed> $data */
     public static function fromArray(array $data): self
     {
-        $topologies = collect($data['resource_topologies'] ?? [])
-            ->map(fn ($item) => ResourceTopologyEntity::fromArray($item));
+        $resources = collect($data['resources'] ?? [])
+            ->map(fn ($item) => DoorEntity::fromArray($item));
 
         return new self(
             new UuidV4($data['id']),
             $data['name'] ?? '',
-            $topologies,
-            ResourceType::from($data['type'] ?? ResourceType::DoorGroup->value)
+            $resources,
+            ResourceType::from($data['type'] ?? ResourceType::Door->value)
         );
     }
 }

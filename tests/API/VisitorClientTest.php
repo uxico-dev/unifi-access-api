@@ -14,7 +14,7 @@ use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
-use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
+use Uxicodev\UnifiAccessApi\Entities\Visitor\VisitorEntity;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
 use Uxicodev\UnifiAccessApi\Exceptions\UnifiApiErrorException;
 use Uxicodev\UnifiAccessApi\UnifiAccessApiServiceProvider;

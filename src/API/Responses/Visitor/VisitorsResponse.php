@@ -4,7 +4,7 @@ namespace Uxicodev\UnifiAccessApi\API\Responses\Visitor;
 
 use Illuminate\Support\Collection;
 use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
-use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
+use Uxicodev\UnifiAccessApi\Entities\Visitor\VisitorEntity;
 
 readonly class VisitorsResponse extends UnifiResponse
 {
