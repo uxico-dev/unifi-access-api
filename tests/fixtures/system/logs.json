@@ -1,0 +1,43 @@
+{
+  "code": "SUCCESS",
+  "data": {
+    "hits": [
+      {
+        "@timestamp": "2023-07-11T12:11:27Z",
+        "_id": "",
+        "_source": {
+          "actor": {
+            "alternate_id": "",
+            "alternate_name": "",
+            "display_name": "N/A",
+            "id": "",
+            "type": "user"
+          },
+          "authentication": {
+            "credential_provider": "NFC",
+            "issuer": "6FC02554"
+          },
+          "event": {
+            "display_message": "Access Denied / Unknown (NFC)",
+            "published": 1689077487000,
+            "reason": "",
+            "result": "BLOCKED",
+            "type": "access.door.unlock"
+          },
+          "target": [
+            {
+              "alternate_id": "",
+              "alternate_name": "",
+              "display_name": "UA-HUB-3855",
+              "id": "7483c2773855",
+              "type": "UAH"
+            }
+          ]
+        },
+        "tag": "access"
+      }
+    ]
+  },
+  "page": 1,
+  "total": 4
+}
