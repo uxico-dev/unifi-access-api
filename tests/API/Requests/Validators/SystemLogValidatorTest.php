@@ -63,4 +63,23 @@ class SystemLogValidatorTest extends TestCase
         $this->assertArrayHasKey('topic', $errors);
         $this->assertArrayHasKey('since', $errors);
     }
+
+    public function test_fails_when_until_not_after_since(): void
+    {
+        $since = Carbon::now()->unix();
+        $until = $since; // 'until' is equal to 'since'
+        $data = [
+            'topic' => 'DOOR_EVENT',
+            'since' => $since,
+            'until' => $until,
+        ];
+        $validator = new SystemLogValidator($data);
+        $this->assertFalse($validator->passes());
+        $errors = $validator->getErrors()->toArray();
+        $this->assertArrayHasKey('until', $errors);
+        $this->assertStringContainsString(
+            "'until' must be after 'since'.",
+            $errors['until'][0]
+        );
+    }
 }
