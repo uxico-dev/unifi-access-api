@@ -43,11 +43,11 @@ UNIFI_ACCESS_SSL_VERIFY=false
 use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\UpsertVisitorRequest;
 use Uxicodev\UnifiAccessApi\UnifiAccessApiFacade;
 
 $unifiClient = UnifiAccessApiFacade::getClient();
-$visitorRequest = new VisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
+$visitorRequest = new UpsertVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
 $visitorResponse = $unifiClient->visitor()->create($visitorRequest);
 $unifiClient->visitor()->assignQrCode($visitorResponse->data->id);
 $tmpFile = $unifiClient->credential()->downloadQrCode($visitorResponse->data->id);
@@ -58,7 +58,7 @@ $tmpFile = $unifiClient->credential()->downloadQrCode($visitorResponse->data->id
 ```php
 use Carbon\Carbon;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\UpsertVisitorRequest;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
@@ -75,7 +75,7 @@ $guzzleClient = new GuzzleHttpClient([
 ]);
             
 $unifiClient = new UnifiClient($guzzleClient);
-$visitorRequest = new VisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
+$visitorRequest = new UpsertVisitorRequest('Jimmy', 'McGill', Carbon::now(), Carbon::now()->addHour(), VisitReason::Others);
 $visitorResponse = $unifiClient->visitor()->create($visitorRequest);
 $unifiClient->visitor()->assignQrCode($visitorResponse->data->id);
 $tmpFile = $unifiClient->credential()->downloadQrCode($visitorResponse->data->id);

@@ -11,7 +11,7 @@ use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\UpsertVisitorRequest;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
 use Uxicodev\UnifiAccessApi\Entities\Visitor\VisitorEntity;
@@ -95,7 +95,7 @@ class VisitorClientTest extends TestCase
 
         $unifiClient = new UnifiClient($client);
 
-        $response = $unifiClient->visitor()->create(new VisitorRequest(
+        $response = $unifiClient->visitor()->create(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -122,7 +122,7 @@ class VisitorClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(InvalidResponseException::class);
-        $unifiClient->visitor()->create(new VisitorRequest(
+        $unifiClient->visitor()->create(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -144,7 +144,7 @@ class VisitorClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(UnifiApiErrorException::class);
-        $unifiClient->visitor()->create(new VisitorRequest(
+        $unifiClient->visitor()->create(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -164,7 +164,7 @@ class VisitorClientTest extends TestCase
         $unifiClient = new UnifiClient($client);
 
         $this->expectException(InvalidArgumentException::class);
-        $unifiClient->visitor()->update(new VisitorRequest(
+        $unifiClient->visitor()->update(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -185,7 +185,7 @@ class VisitorClientTest extends TestCase
 
         $unifiClient = new UnifiClient($client);
 
-        $response = $unifiClient->visitor()->update(new VisitorRequest(
+        $response = $unifiClient->visitor()->update(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),
@@ -212,7 +212,7 @@ class VisitorClientTest extends TestCase
 
         $this->expectException(InvalidResponseException::class);
 
-        $response = $unifiClient->visitor()->update(new VisitorRequest(
+        $response = $unifiClient->visitor()->update(new UpsertVisitorRequest(
             'Saul',
             'Goodman',
             Carbon::now(),

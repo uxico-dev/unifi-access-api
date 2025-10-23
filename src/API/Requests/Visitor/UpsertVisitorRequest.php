@@ -9,7 +9,7 @@ use Uxicodev\UnifiAccessApi\API\Requests\Validators\VisitorValidator;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Exceptions\ValidationException;
 
-readonly class VisitorRequest
+readonly class UpsertVisitorRequest
 {
     /**
      * @param  ?Collection<int, ResourceRequest>  $resources
