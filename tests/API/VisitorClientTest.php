@@ -223,6 +223,21 @@ class VisitorClientTest extends TestCase
     }
 
     #[Test]
+    public function assign_qr_code_returns_unifi_response(): void
+    {
+        $mockHandler = new MockHandler([
+            new Response(200, [], json_encode(['code' => 'SUCCESS', 'msg' => 'success'])),
+        ]);
+        $handlerStack = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handlerStack]);
+        $unifiClient = new UnifiClient($client);
+        $visitorId = new UuidV4('8564ce90-76ba-445f-b78b-6cca39af0130');
+        $response = $unifiClient->visitor()->assignQrCode($visitorId);
+        $this->assertEquals('SUCCESS', $response->code);
+        $this->assertEquals('success', $response->msg);
+    }
+
+    #[Test]
     public function a_visitor_can_be_deleted(): void
     {
         $mockHandler = new MockHandler([
