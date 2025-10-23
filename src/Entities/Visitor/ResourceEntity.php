@@ -1,6 +1,6 @@
 <?php
 
-namespace Uxicodev\UnifiAccessApi\Entities;
+namespace Uxicodev\UnifiAccessApi\Entities\Visitor;
 
 use Uxicodev\UnifiAccessApi\API\Enums\ResourceType;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;

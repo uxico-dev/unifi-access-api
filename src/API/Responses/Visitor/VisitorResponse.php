@@ -3,7 +3,7 @@
 namespace Uxicodev\UnifiAccessApi\API\Responses\Visitor;
 
 use Uxicodev\UnifiAccessApi\API\Responses\UnifiResponse;
-use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
+use Uxicodev\UnifiAccessApi\Entities\Visitor\VisitorEntity;
 
 readonly class VisitorResponse extends UnifiResponse
 {

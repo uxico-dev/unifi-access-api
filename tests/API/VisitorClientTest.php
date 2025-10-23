@@ -14,7 +14,7 @@ use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
 use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
 use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Client\Client as UnifiClient;
-use Uxicodev\UnifiAccessApi\Entities\VisitorEntity;
+use Uxicodev\UnifiAccessApi\Entities\Visitor\VisitorEntity;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
 use Uxicodev\UnifiAccessApi\Exceptions\UnifiApiErrorException;
 use Uxicodev\UnifiAccessApi\UnifiAccessApiServiceProvider;
@@ -220,6 +220,21 @@ class VisitorClientTest extends TestCase
             VisitReason::Business,
             id: new UuidV4('8564ce90-76ba-445f-b78b-6cca39af0130'),
         ));
+    }
+
+    #[Test]
+    public function assign_qr_code_returns_unifi_response(): void
+    {
+        $mockHandler = new MockHandler([
+            new Response(200, [], json_encode(['code' => 'SUCCESS', 'msg' => 'success'])),
+        ]);
+        $handlerStack = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handlerStack]);
+        $unifiClient = new UnifiClient($client);
+        $visitorId = new UuidV4('8564ce90-76ba-445f-b78b-6cca39af0130');
+        $response = $unifiClient->visitor()->assignQrCode($visitorId);
+        $this->assertEquals('SUCCESS', $response->code);
+        $this->assertEquals('success', $response->msg);
     }
 
     #[Test]

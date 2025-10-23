@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 use Uxicodev\UnifiAccessApi\API\CredentialClient;
 use Uxicodev\UnifiAccessApi\API\DoorGroupsClient;
+use Uxicodev\UnifiAccessApi\API\SystemClient;
 use Uxicodev\UnifiAccessApi\API\VisitorClient;
 use Uxicodev\UnifiAccessApi\Exceptions\InvalidResponseException;
 use Uxicodev\UnifiAccessApi\Exceptions\UnifiApiErrorException;
@@ -20,11 +21,14 @@ class Client
 
     protected DoorGroupsClient $doorGroupsClient;
 
+    protected SystemClient $systemClient;
+
     public function __construct(protected GuzzleHttpClient $client)
     {
         $this->visitorClient = new VisitorClient($this);
         $this->credentialClient = new CredentialClient($this);
         $this->doorGroupsClient = new DoorGroupsClient($this);
+        $this->systemClient = new SystemClient($this);
     }
 
     /**
@@ -136,6 +140,11 @@ class Client
     public function doorGroups(): DoorGroupsClient
     {
         return $this->doorGroupsClient;
+    }
+
+    public function system(): SystemClient
+    {
+        return $this->systemClient;
     }
 
     /**
