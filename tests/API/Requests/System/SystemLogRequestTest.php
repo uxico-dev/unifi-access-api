@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Uxicodev\UnifiAccessApi\API\Enums\SystemLogTopic;
 use Uxicodev\UnifiAccessApi\API\Requests\System\SystemLogRequest;
-use Uxicodev\UnifiAccessApi\API\ValueObjects\UuidV4;
 use Uxicodev\UnifiAccessApi\Exceptions\ValidationException;
 
 class SystemLogRequestTest extends TestCase
@@ -64,4 +63,3 @@ class SystemLogRequestTest extends TestCase
         }
     }
 }
-

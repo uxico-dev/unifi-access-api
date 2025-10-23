@@ -5,7 +5,7 @@ namespace Uxicodev\UnifiAccessApi\Tests\API\Requests\Visitor;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Uxicodev\UnifiAccessApi\API\Enums\VisitReason;
-use Uxicodev\UnifiAccessApi\API\Requests\Visitor\VisitorRequest;
+use Uxicodev\UnifiAccessApi\API\Requests\Visitor\UpsertVisitorRequest;
 use Uxicodev\UnifiAccessApi\Exceptions\ValidationException;
 
 class VisitorRequestTest extends TestCase
@@ -14,7 +14,7 @@ class VisitorRequestTest extends TestCase
     public function construct_throws_error_when_phone_number_is_not_e164_compliant(): void
     {
         $this->expectException(ValidationException::class);
-        new VisitorRequest(
+        new UpsertVisitorRequest(
             'John',
             'Doe',
             now(),
@@ -36,9 +36,9 @@ class VisitorRequestTest extends TestCase
             'mobile_phone' => '+1234567890',
         ];
 
-        $visitorRequest = VisitorRequest::fromArray($data);
+        $visitorRequest = UpsertVisitorRequest::fromArray($data);
 
-        $this->assertInstanceOf(VisitorRequest::class, $visitorRequest);
+        $this->assertInstanceOf(UpsertVisitorRequest::class, $visitorRequest);
         $this->assertEquals('Jane', $visitorRequest->first_name);
         $this->assertEquals('Doe', $visitorRequest->last_name);
         $this->assertEquals(VisitReason::Business, $visitorRequest->visit_reason);
