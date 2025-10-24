@@ -7,6 +7,12 @@
 ![Static Badge](https://img.shields.io/badge/level%208%20-%20phpstan?logo=php&label=PHPStan&color=darkblue)
 
 A GuzzleHTTP client that can communicate with the Ubiquiti Unifi Access API. Ready to use with Laravel, but can also be used with other frameworks or plain PHP.
+Currently the following Unifi Access resources have been (partially) implemented:
+
+- Visitor
+- Credential
+- DoorGroups
+- System
 
 ## Installation
 
@@ -19,11 +25,7 @@ composer require uxicodev/unifi-access-api
 ## Usage
  
 The Unifi Access API exposes several resources. The resources are represented by different Client classes. 
-All resources can be accessed through the `UnifiAccessApi\Client\Client` class. For now the following resources have been (partially) implemented:
-
-- Visitor
-- Credential
-- DoorGroups
+All resources can be accessed through the `UnifiAccessApi\Client\Client` class.
 
 All responses are represented by Data Transfer Objects (DTOs) that can be found in the `Uxicodev\UnifiAccessApi\API\Responses` namespace.
 The objects returned are Entities that can be found in the `Uxicodev\UnifiAccessApi\API\Entities` namespace.
