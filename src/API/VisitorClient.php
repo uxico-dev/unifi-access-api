@@ -92,13 +92,15 @@ class VisitorClient extends ApiResourceClient
     }
 
     /**
+     * @param bool $force If is_force is passed, physically delete this visitor; otherwise, update to canceled status.
+     *
      * @throws InvalidResponseException
      * @throws GuzzleException
      * @throws UnifiApiErrorException
      */
-    public function delete(UuidV4 $visitorId): UnifiResponse
+    public function delete(UuidV4 $visitorId, bool $force = false): UnifiResponse
     {
-        $response = $this->client->delete($this::ENDPOINT."/{$visitorId->getValue()}");
+        $response = $this->client->delete($this::ENDPOINT."/{$visitorId->getValue()}?is_force={($force ? 'true' : 'false')}");
 
         $data = json_decode($response->getBody()->getContents(), true);
 
