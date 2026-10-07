@@ -2,6 +2,11 @@
 
 All notable changes to `unifi-access-api` will be documented in this file
 
+# 1.1.2 - 2025-10-25
+
+**New features:**
+- Update visitor delete method to allow force delete
+
 ## 1.1.1 - 2025-10-23
 
 **Breaking:**
